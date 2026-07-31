@@ -1,0 +1,63 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Data (keep folder structure only)
+data/raw/*
+data/bronze/*
+data/silver/*
+data/gold/*
+
+# Keep directories
+!data/raw/.gitkeep
+!data/bronze/.gitkeep
+!data/silver/.gitkeep
+!data/gold/.gitkeep
+
+# Infrastructure state
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Docker
+*.pid
+
+# Node (for frontend later)
+node_modules/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

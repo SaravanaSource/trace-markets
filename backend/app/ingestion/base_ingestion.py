@@ -39,7 +39,7 @@ class BaseIngestion(ABC):
             )
 
             elapsed = perf_counter() - start
-            logger.success(f" {self.source}  Ingestion completed in {elapsed:.3f} sec" )
+            logger.success(f"{self.source}  Ingestion completed in {elapsed:.3f} sec" )
             return path
 
         except Exception as exe:

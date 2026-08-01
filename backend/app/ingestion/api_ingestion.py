@@ -12,6 +12,7 @@ class APIIngestion (BaseIngestion):
 
     def fetch(self):
         return self.client.get(
-            "https://jsonplaceholder.typicode.com/posts/1"
+            # "https://jsonplaceholder.typicode.com/posts/1"
+            "https://jsonplaceholder.typicode.com/does-not-exist" # test
         )
         

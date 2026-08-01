@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     APP_NAME: str = "Trace Markets"
     VERSION: str = "0.1.0"
 
+    HTTP_TIMEOUT: int = 30
+    HTTP_MAX_RETRIES: int = 3
+    HTTP_RETRY_DELAY: int = 1
+
     DATA_DIR: Path = BASE_DIR / "data"
     RAW_DIR: Path = DATA_DIR / "raw"
     BRONZE_DIR: Path = DATA_DIR / "bronze"

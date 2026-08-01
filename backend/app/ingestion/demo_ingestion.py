@@ -1,16 +1,15 @@
 from app.core.logging import logger
 from app.ingestion.base_ingestion import BaseIngestion
-from app.storage.bronze_storage import BronzeStorage
 
 
 class DemoIngestion(BaseIngestion):
 
-    def __init__(self):
-        self.storage = BronzeStorage()
-     
+    source = "demo"
+
     def fetch(self):
+
         logger.info("Fetching demo market data...")
-        data = {
+        return  {
             "source": "demo",
             "market": "Indian Stock Market",
             "timestamp": "2026-08-01T10:45:00",
@@ -25,10 +24,3 @@ class DemoIngestion(BaseIngestion):
                 }
             ]
         }
-
-        self.storage.save(
-            source = 'demo',
-            data = data
-        )
-
-        return data

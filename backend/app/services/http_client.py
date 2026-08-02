@@ -2,9 +2,11 @@ from __future__ import annotations
 from typing import Any
 import httpx
 import time
+from datetime import datetime, UTC
 
 from app.core.config import settings
 from app.core.logging import logger
+from app.models.bronze_record import BronzeRecord
 from app.core.exceptions import  InvalidResponseError, RetryLimitExceededError
 
 class HttpClient:
@@ -32,8 +34,20 @@ class HttpClient:
                     response.raise_for_status()
                     logger.success(f"Received HTTP {response.status_code}")
 
+                    metadata = {
+                        "source": "api",
+                        "url" : url,
+                        "http_status" : response.status_code,
+                        "fetched_at" : datetime.now(UTC).isoformat()
+                    }
+
                     try:
-                        return response.json()
+
+                        return BronzeRecord(
+                            metadata= metadata,
+                            payload= response.json()
+                        )
+                    
                     except ValueError as exc:
                         raise InvalidResponseError (
                             "Response is not valid json"

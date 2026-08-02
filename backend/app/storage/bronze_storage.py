@@ -5,6 +5,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from dataclasses import asdict
+from app.models.bronze_record import BronzeRecord
+
 from app.core.config import settings
 from app.core.logging import logger
 
@@ -34,6 +37,9 @@ class BronzeStorage:
         )
         filename = datetime.now().strftime("%Y%m%d_%H%M%S.json")
         file_path = directory/filename
+
+        if isinstance(data, BronzeRecord):
+            data = asdict(data)
 
         with open(file_path, 'w', encoding= 'utf-8' ) as file:
             json.dump(

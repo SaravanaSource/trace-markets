@@ -630,3 +630,188 @@ We are building an engineering platform that teaches production-grade software e
 
 Every architectural decision must support that vision.
 
+
+
+
+---
+
+# Platform Evolution Strategy
+
+## Core Philosophy
+
+Trace Markets is the first production application built on the Trace ecosystem.
+
+The objective is **not** to build a generic platform first.
+
+Instead, the platform evolves by extracting reusable components from real product implementations.
+
+This approach prevents premature abstraction and ensures every framework component solves a real engineering problem.
+
+---
+
+## Evolution Model
+
+```
+Trace Markets
+
+↓
+
+Reusable Pattern Identified
+
+↓
+
+Extract into Trace Core
+
+↓
+
+Trace Markets becomes simpler
+
+↓
+
+Trace Core becomes stronger
+
+↓
+
+Next Product (TraceRank)
+
+↓
+
+Extract More Reusable Components
+
+↓
+
+Trace Core evolves further
+```
+
+Trace Core grows through experience rather than speculation.
+
+---
+
+## Trace Core Responsibilities
+
+Trace Core contains only domain-independent capabilities.
+
+Examples include:
+
+- Connector Framework
+- Ingestion Framework
+- Storage Framework
+- Metadata Framework
+- Schema Registry
+- Data Quality Framework
+- Processing Framework
+- AI Provider Framework
+- Authentication Framework
+- Logging
+- Configuration
+- Monitoring
+- Notification Framework
+- API Framework
+
+These capabilities should work for finance, education, healthcare, enterprise systems, and future products without modification.
+
+---
+
+## Product Responsibilities
+
+Each product contains only business-specific logic.
+
+### Trace Markets
+
+- Market Data
+- Fundamental Analysis
+- Technical Indicators
+- Portfolio Analytics
+- Risk Engine
+- Market Regime Detection
+
+### TraceRank
+
+- Question Bank
+- Mock Tests
+- Current Affairs
+- Student Analytics
+- Learning Progress
+
+Future products should follow the same principle.
+
+---
+
+## Extraction Rule
+
+Before moving any component into Trace Core, ask:
+
+> "Would this component work unchanged in at least three different products?"
+
+If the answer is **yes**, it belongs in Trace Core.
+
+If the answer is **no**, it remains inside the product.
+
+Examples
+
+Move to Core:
+
+- HTTPClient
+- BronzeStorage
+- SchemaRegistry
+- Manifest
+- BaseIngestion
+- DataQualityEngine
+
+Keep inside Trace Markets:
+
+- PortfolioAnalyzer
+- MarketRegimeEngine
+- TechnicalIndicators
+- CorporateActionsProcessor
+
+---
+
+## Repository Strategy
+
+During the early stages of development, Trace Markets and Trace Core will remain in the same repository.
+
+```
+trace-platform/
+
+├── core/
+│
+├── applications/
+│   ├── trace-markets/
+│   ├── tracerank/
+│   └── future-products/
+│
+├── docs/
+│
+└── tests/
+```
+
+A separate repository for Trace Core should only be considered after multiple applications successfully depend on it.
+
+---
+
+## Long-Term Vision
+
+The long-term goal is to create a reusable engineering platform capable of powering multiple intelligent products.
+
+```
+                   Trace Ecosystem
+
+                           │
+
+          ┌────────────────┼────────────────┐
+
+          ▼                ▼                ▼
+
+      Trace Core     Trace Markets     TraceRank
+
+                           │
+
+                   Future Applications
+```
+
+Trace Markets is therefore both:
+
+- A production financial intelligence platform.
+- The reference implementation that continuously improves Trace Core.
+

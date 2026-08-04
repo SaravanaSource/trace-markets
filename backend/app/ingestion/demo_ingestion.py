@@ -9,6 +9,7 @@ class DemoIngestion(BaseIngestion):
     def fetch(self):
 
         logger.info("Fetching demo market data...")
+        
         return  {
             "source": "demo",
             "market": "Indian Stock Market",

@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "sources": {
+        "api": {
+            "current_version": 2,
+            "history": [
+                {
+                    "version": 1,
+                    "registered_at": "2026-08-04T14:39:31.500835+00:00",
+                    "schema": {}
+                },
+                {
+                    "version": 2,
+                    "registered_at": "2026-08-04T14:58:02.535257+00:00",
+                    "schema": {
+                        "userId": "int",
+                        "id": "int",
+                        "title": "str",
+                        "body": "str"
+                    }
+                }
+            ]
+        }
+    }
+}

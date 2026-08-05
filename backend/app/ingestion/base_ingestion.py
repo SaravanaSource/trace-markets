@@ -11,6 +11,10 @@ from app.schema.schema_registry import SchemaRegistry
 from app.schema.schema_utils import SchemaUtils
 from app.storage.bronze_storage import BronzeStorage
 
+from app.dq.base_rule import BaseRule
+from app.dq.dq_engine import DQEngine
+
+
 
 class BaseIngestion(ABC):
     """
@@ -41,9 +45,6 @@ class BaseIngestion(ABC):
             Path("data/metadata/schema_registry.json")
         )
 
-        # Future
-
-        # self.dq_engine = DQEngine(...)
 
     # ==========================================================
     # Template Method
@@ -131,13 +132,29 @@ class BaseIngestion(ABC):
 
     def _run_data_quality(self, data):
 
-        """
-        Placeholder.
+        rules = self.get_dq_rules()
 
-        Sprint 13 integration.
-        """
+        if not rules:
+            logger.info("No Data Quality rules configured.")
+            return
 
-        pass
+        report = DQEngine(rules).validate(data.payload)
+
+        logger.info(
+            "DQ Summary: {}/{} rules passed",
+            report.passed,
+            report.total,
+        )
+
+        for result in report.results:
+
+            if result.passed:
+                logger.success("{} ✓ {}", result.rule, result.message)
+            else:
+                logger.error("{} ✗ {}", result.rule, result.message)
+
+        if not report.success:
+            raise ValueError("Data Quality validation failed.")
 
     def _store_bronze(self, data):
 
@@ -162,3 +179,13 @@ class BaseIngestion(ABC):
             raise ValueError(
                 "No data returned from fetch()."
             )
+
+
+    def get_dq_rules(self) -> list[BaseRule]:
+        """
+        Returns Data Quality rules for this ingestion.
+
+        Child classes can override this to provide
+        source-specific validation rules.
+        """
+        return []

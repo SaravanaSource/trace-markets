@@ -13,7 +13,7 @@ class SilverProcessor(BaseProcessor):
     StockRecord model.
     """
 
-    def process(
+    def process(    
         self,
         record: BronzeRecord,
     ) -> StockRecord:

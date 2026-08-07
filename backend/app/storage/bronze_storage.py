@@ -11,6 +11,7 @@ from app.models.bronze_record import BronzeRecord
 from app.core.config import settings
 from app.core.logging import logger
 from app.storage.manifest import Manifest
+from app.storage.json_storage import JSONStorage
 
 class BronzeStorage:
     """
@@ -20,6 +21,7 @@ class BronzeStorage:
 
     def __init__(self):
         self.base_path = settings.BRONZE_DIR
+        self.storage = JSONStorage()
 
     def save(self, source:str, data:Any) -> Path:
         """
@@ -41,13 +43,10 @@ class BronzeStorage:
         if isinstance(data, BronzeRecord):
             data = asdict(data)
 
-        with open(file_path, 'w', encoding= 'utf-8' ) as file:
-            json.dump(
-                data,
-                file,
-                ensure_ascii= False,
-                indent=4
-            )
+        self.storage.save(
+            data,
+            file_path,
+        )
 
         logger.success(f"Bronze file written -> {file_path}")
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from app.storage.bronze_record import BronzeRecord
+from app.models.bronze_record import BronzeRecord
 
 
 class BaseProcessor(ABC):
